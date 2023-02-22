@@ -18,22 +18,22 @@ public class LeavePO {
     @Id
     @GenericGenerator(name="idGenerator", strategy="uuid") //这个是hibernate的注解/生成32位UUID
     @GeneratedValue(generator="idGenerator")
-    String id;
-    String applicantId;
-    String applicantName;
+    private String id;
+    private String applicantId;
+    private String applicantName;
     @Enumerated(EnumType.STRING)
-    PersonType applicantType;
-    String approverId;
-    String approverName;
+    private PersonType applicantType;
+    private String approverId;
+    private String approverName;
     @Enumerated(EnumType.STRING)
-    LeaveType leaveType;
+    private LeaveType leaveType;
     @Enumerated(EnumType.STRING)
-    Status status;
-    Date startTime;
-    Date endTime;
-    long duration;
+    private Status status;
+    private Date startTime;
+    private Date endTime;
+    private long duration;
     @Transient
-    List<ApprovalInfoPO> historyApprovalInfoPOList;
+    private List<ApprovalInfoPO> historyApprovalInfoPOList;
 
     public Leave toLeave() {
         return new Leave();

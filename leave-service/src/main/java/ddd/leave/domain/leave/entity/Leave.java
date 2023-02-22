@@ -17,29 +17,41 @@ import java.util.List;
 @Data
 public class Leave {
 
-    String id;
-    // 请假申请人
-    Applicant applicant;
-    // 审批人
-    Approver approver;
+    private String id;
+    // 请假申请人(值对象)
+    private Applicant applicant;
+    // 审批人（值对象）
+    private Approver approver;
     // 请假类型
-    LeaveType type;
+    private LeaveType type;
     // 请假单状态
-    Status status;
-    Date startTime;
-    Date endTime;
-    long duration;
-    //审批领导的最大级别
-    int leaderMaxLevel;
+    private Status status;
+    // 审批开始时间
+    private Date startTime;
+    // 审批结束时间
+    private Date endTime;
+    // 审批耗时
+    private long duration;
+    // 审批领导的最大级别
+    private int leaderMaxLevel;
     // 当前节点审批信息
-    ApprovalInfo currentApprovalInfo;
+    private ApprovalInfo currentApprovalInfo;
     // 审批历史轨迹（值对象）
-    List<ApprovalInfo> historyApprovalInfos;
+    private List<ApprovalInfo> historyApprovalInfos;
 
+    /**
+     * 获取审批时长
+     * @return
+     */
     public long getDuration() {
         return endTime.getTime() - startTime.getTime();
     }
 
+    /**
+     * 添加审批历史轨迹
+     * @param approvalInfo
+     * @return
+     */
     public Leave addHistoryApprovalInfo(ApprovalInfo approvalInfo) {
         if (null == historyApprovalInfos)
             historyApprovalInfos = new ArrayList<>();
@@ -47,18 +59,32 @@ public class Leave {
         return this;
     }
 
+    /**
+     * 创建请假申请
+     * @return
+     */
     public Leave create(){
         this.setStatus(Status.APPROVING);
         this.setStartTime(new Date());
         return this;
     }
 
+    /**
+     * 审批通过
+     * @param nextApprover
+     * @return
+     */
     public Leave agree(Approver nextApprover){
         this.setStatus(Status.APPROVING);
         this.setApprover(nextApprover);
         return this;
     }
 
+    /**
+     * 审批拒绝
+     * @param approver
+     * @return
+     */
     public Leave reject(Approver approver){
         this.setApprover(approver);
         this.setStatus(Status.REJECTED);
@@ -66,6 +92,10 @@ public class Leave {
         return this;
     }
 
+    /**
+     * 审批结束
+     * @return
+     */
     public Leave finish(){
         this.setApprover(null);
         this.setStatus(Status.APPROVED);

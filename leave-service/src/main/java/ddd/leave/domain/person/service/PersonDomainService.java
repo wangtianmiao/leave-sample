@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * 管理人员信息和上下级关系
+ */
 @Service
 @Slf4j
 public class PersonDomainService {

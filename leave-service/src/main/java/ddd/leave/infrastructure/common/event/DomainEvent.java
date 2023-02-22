@@ -7,8 +7,12 @@ import java.util.Date;
 @Data
 public class DomainEvent {
 
-    String id;
-    Date timestamp;
-    String source;
-    String data;
+    // 事件 ID
+    private String id;
+    // 事件时间戳
+    private Date timestamp;
+    // 事件源
+    private String source;
+    // 事件相关的业务数据
+    private String data;
 }

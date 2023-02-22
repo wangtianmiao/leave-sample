@@ -13,26 +13,36 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * 仓储实现
+ * 完成数据持久化和数据库查询
  * persist entity and handle event in repository
  */
 @Repository
 public class LeaveRepositoryImpl implements LeaveRepositoryInterface {
 
     @Autowired
-    LeaveDao leaveDao;
-    @Autowired
-    ApprovalInfoDao approvalInfoDao;
-    @Autowired
-    LeaveEventDao leaveEventDao;
+    private LeaveDao leaveDao;
 
+    @Autowired
+    private ApprovalInfoDao approvalInfoDao;
+
+    @Autowired
+    private LeaveEventDao leaveEventDao;
+
+    /**
+     * 由仓储实现完成 PO 对象持久化
+     * @param leavePO
+     */
+    @Override
     public void save(LeavePO leavePO) {
-        //persist leave entity
+        // persist leave entity
         leaveDao.save(leavePO);
-       //set leave_id for approvalInfoPO after save leavePO
+        // set leave_id for approvalInfoPO after save leavePO
         leavePO.getHistoryApprovalInfoPOList().stream().forEach(approvalInfoPO -> approvalInfoPO.setLeaveId(leavePO.getId()));
         approvalInfoDao.saveAll(leavePO.getHistoryApprovalInfoPOList());
     }
 
+    @Override
     public void saveEvent(LeaveEventPO leaveEventPO){
         leaveEventDao.save(leaveEventPO);
     }

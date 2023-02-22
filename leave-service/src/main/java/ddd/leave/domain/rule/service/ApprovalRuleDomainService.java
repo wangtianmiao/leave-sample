@@ -5,11 +5,14 @@ import ddd.leave.domain.rule.repository.facade.ApprovalRuleRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 提供请假审批规则查询
+ */
 @Service
 public class ApprovalRuleDomainService {
 
     @Autowired
-    ApprovalRuleRepositoryInterface repositoryInterface;
+    private ApprovalRuleRepositoryInterface repositoryInterface;
 
     public int getLeaderMaxLevel(String personType, String leaveType, long duration) {
         ApprovalRule rule = new ApprovalRule();

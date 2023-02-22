@@ -22,14 +22,15 @@ public class LeaveApplicationService{
     ApprovalRuleDomainService approvalRuleDomainService;
 
     /**
-     * 创建一个请假申请并为审批人生成任务
+     * 创建请假单
      * @param leave
      */
     public void createLeaveInfo(Leave leave){
-        //get approval leader max level by rule
+        // 1. 根据请假单定义的人员类型、请假类型和请假时长从 rule 聚合中获取请假审批规则
         int leaderMaxLevel = approvalRuleDomainService.getLeaderMaxLevel(leave.getApplicant().getPersonType(), leave.getType().toString(), leave.getDuration());
-        //find next approver
+        // 2. 根据请假审批规则，从 person 聚合中获取请假审批人
         Person approver = personDomainService.findFirstApprover(leave.getApplicant().getPersonId(), leaderMaxLevel);
+        // 3. 根据请假数据和从 rule 和 person 聚合获取的数据，创建请假单
         leaveDomainService.createLeave(leave, leaderMaxLevel, Approver.fromPerson(approver));
     }
 

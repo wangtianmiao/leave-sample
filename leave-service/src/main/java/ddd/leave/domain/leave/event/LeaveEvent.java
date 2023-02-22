@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 public class LeaveEvent extends DomainEvent {
 
-    LeaveEventType leaveEventType;
+    private LeaveEventType leaveEventType;
 
     public static LeaveEvent create(LeaveEventType eventType, Leave leave){
         LeaveEvent event = new LeaveEvent();

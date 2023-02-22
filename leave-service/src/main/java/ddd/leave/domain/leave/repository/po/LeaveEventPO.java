@@ -14,10 +14,10 @@ public class LeaveEventPO {
     @Id
     @GenericGenerator(name = "idGenerator", strategy = "uuid") //这个是hibernate的注解/生成32位UUID
     @GeneratedValue(generator = "idGenerator")
-    int id;
+    private int id;
     @Enumerated(EnumType.STRING)
-    LeaveEventType leaveEventType;
-    Date timestamp;
-    String source;
-    String data;
+    private LeaveEventType leaveEventType;
+    private Date timestamp;
+    private String source;
+    private String data;
 }

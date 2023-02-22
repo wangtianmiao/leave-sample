@@ -6,17 +6,22 @@ import lombok.Data;
 
 /**
  * 审批意见实体
+ * @author karson
  */
 @Data
 public class ApprovalInfo {
 
-    String approvalInfoId;
-    // 审批人
-    Approver approver;
+    private String approvalInfoId;
+
+    // 审批人（值对象）
+    private Approver approver;
+
     // 审批状态类型
-    ApprovalType approvalType;
+    private ApprovalType approvalType;
+
     // 审批意见
-    String msg;
-    long time;
+    private String msg;
+
+    private long time;
 
 }

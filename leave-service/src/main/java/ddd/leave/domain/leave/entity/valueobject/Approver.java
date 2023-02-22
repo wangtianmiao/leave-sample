@@ -1,7 +1,6 @@
 package ddd.leave.domain.leave.entity.valueobject;
 
 import ddd.leave.domain.person.entity.Person;
-import ddd.leave.domain.person.repository.po.PersonPO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,9 +15,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Approver {
 
-    String personId;
-    String personName;
-    int level;
+    private String personId;
+    private String personName;
+    // 管理级别
+    private int level;
 
     public static Approver fromPerson(Person person){
         Approver approver = new Approver();
